@@ -1,41 +1,23 @@
 "use client";
 
-import { useContext, useState } from "react";
-import { AuthContext } from "./AuthSwitcher";
+import Link from "next/link";
+import { useActionState } from "react";
+import { registerAction } from "./actions";
 
-const PASSWORD_REQUIRED_LENGTH = 6;
+const initialState = { ok: false, error: "" };
 
-export const SignUpForm = () => {
-  const { setIsLogin } = useContext(AuthContext);
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmedPassword, setConfirmedPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const isValidPasswordLength = password.length >= PASSWORD_REQUIRED_LENGTH;
-  const isPasswordValid = password === confirmedPassword;
-
-  const handleSignUp = () => {
-    if (!username.length) {
-      setError("Username is required");
-      return;
-    }
-    if (!isValidPasswordLength) {
-      setError("Password must be at least 6 characters long");
-      return;
-    }
-    if (!isPasswordValid) {
-      setError("Confirm password is not the same as password");
-      return;
-    }
-
-    setError("");
-  };
+export default function SignUp() {
+  const [state, formAction, isPending] = useActionState(
+    registerAction,
+    initialState
+  );
 
   return (
     <div className="absolute top-1/2 left-1/2 flex sm:h-[500px] h-[450px] sm:w-[360px] w-[300px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-3xl border border-white/20 bg-white/10 sm:p-5 p-3 text-white shadow-[0_18px_45px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
-      <form className="flex h-full w-full flex-col justify-between gap-6 sm:p-2">
+      <form
+        action={formAction}
+        className="flex h-full w-full flex-col justify-between gap-6 sm:p-2"
+      >
         <div className="space-y-1">
           <h2 className="sm:text-3xl text-2xl font-semibold leading-tight">
             Welcome
@@ -49,8 +31,7 @@ export const SignUpForm = () => {
               Username
             </label>
             <input
-              value={username}
-              onChange={({ currentTarget: { value } }) => setUsername(value)}
+              name="username"
               type="text"
               placeholder="your.name"
               autoComplete="username"
@@ -62,8 +43,7 @@ export const SignUpForm = () => {
               Password
             </label>
             <input
-              value={password}
-              onChange={({ currentTarget: { value } }) => setPassword(value)}
+              name="password"
               type="password"
               placeholder="••••••••"
               autoComplete="current-password"
@@ -75,10 +55,7 @@ export const SignUpForm = () => {
               Confirm password
             </label>
             <input
-              value={confirmedPassword}
-              onChange={({ currentTarget: { value } }) =>
-                setConfirmedPassword(value)
-              }
+              name="confirm-password"
               type="password"
               placeholder="••••••••"
               autoComplete="current-password"
@@ -88,25 +65,26 @@ export const SignUpForm = () => {
         </div>
 
         <div className="flex flex-col items-center text-center">
-          {error && <p className="text-red-700 text-xs">{error}</p>}
+          {state.error && <p className="text-red-700 text-xs">{state.error}</p>}
 
-          <button
-            type="button"
+          <Link
+            href="login"
             className="text-sm text-white/60 hover:text-white cursor-pointer"
-            onClick={() => setIsLogin(true)}
           >
             Already have an account? Sign in
-          </button>
+          </Link>
         </div>
 
         <button
-          onClick={handleSignUp}
-          type="button"
-          className="cursor-pointer not-last-of-type:mt-2 w-full rounded-xl border border-white/80 bg-white/90 sm:py-3 py-2 text-sm font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.6)] transition transform hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 active:scale-[0.98]"
+          disabled={isPending}
+          type="submit"
+          className={`cursor-pointer not-last-of-type:mt-2 w-full rounded-xl border border-white/80 bg-white/90 sm:py-3 py-2 text-sm font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.6)] transition transform hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 active:scale-[0.98] ${
+            isPending ? "opacity-50 cursor-not-allowed" : "hover:bg-white"
+          }`}
         >
-          Sign up
+          {isPending ? "Loading" : "Sign up"}
         </button>
       </form>
     </div>
   );
-};
+}

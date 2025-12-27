@@ -1,33 +1,23 @@
 "use client";
 
-import { useContext, useState } from "react";
-import { AuthContext } from "./AuthSwitcher";
+import Link from "next/link";
+import { useActionState } from "react";
+import { loginAction } from "./actions";
 
-export const LoginForm = () => {
-  const { setIsLogin } = useContext(AuthContext);
+const initialState = { ok: false, error: "" };
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [error, setError] = useState("");
-
-  const handleLogin = () => {
-    if (!username.length) {
-      setError("Username is required");
-      return;
-    }
-
-    if (!password.length) {
-      setError("Password is required");
-      return;
-    }
-
-    setError("");
-  };
+export default function Login() {
+  const [state, formAction, isPending] = useActionState(
+    loginAction,
+    initialState
+  );
 
   return (
     <div className="absolute top-1/2 left-1/2 flex sm:h-[500px] h-[450px] sm:w-[360px] w-[300px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-3xl border border-white/20 bg-white/10 sm:p-5 p-3 text-white shadow-[0_18px_45px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
-      <form className="flex h-full w-full flex-col justify-between gap-6 p-2">
+      <form
+        action={formAction}
+        className="flex h-full w-full flex-col justify-between gap-6 p-2"
+      >
         <div className="space-y-1">
           <h2 className="sm:text-3xl text-2xl font-semibold leading-tight">
             Welcome back
@@ -41,8 +31,7 @@ export const LoginForm = () => {
               Username
             </label>
             <input
-              value={username}
-              onChange={({ currentTarget: { value } }) => setUsername(value)}
+              name="username"
               type="text"
               placeholder="your.name"
               autoComplete="username"
@@ -54,8 +43,7 @@ export const LoginForm = () => {
               Password
             </label>
             <input
-              value={password}
-              onChange={({ currentTarget: { value } }) => setPassword(value)}
+              name="password"
               type="password"
               placeholder="••••••••"
               autoComplete="current-password"
@@ -64,24 +52,27 @@ export const LoginForm = () => {
           </div>
         </div>
 
-        {error && <p className="text-red-700 text-xs">{error}</p>}
+        <div className="flex flex-col items-center text-center">
+          {state.error && <p className="text-red-700 text-xs">{state.error}</p>}
+
+          <Link
+            href="/register"
+            className="text-sm text-white/60 hover:text-white cursor-pointer mt-2"
+          >
+            Don&apos;t have an account? Sign up
+          </Link>
+        </div>
 
         <button
-          type="button"
-          className="text-sm text-white/60 hover:text-white cursor-pointer mt-2"
-          onClick={() => setIsLogin(false)}
+          disabled={isPending}
+          type="submit"
+          className={`cursor-pointer not-last-of-type:mt-2 w-full rounded-xl border border-white/80 bg-white/90 sm:py-3 py-2 text-sm font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.6)] transition transform hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 active:scale-[0.98] ${
+            isPending ? "opacity-50 cursor-not-allowed" : "hover:bg-white"
+          }`}
         >
-          Don&apos;t have an account? Sign up
-        </button>
-
-        <button
-          onClick={handleLogin}
-          type="button"
-          className="cursor-pointer not-last-of-type:mt-2 w-full rounded-xl border border-white/80 bg-white/90 sm:py-3 py-2 text-sm font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.6)] transition transform hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 active:scale-[0.98]"
-        >
-          Sign in
+          {isPending ? "Loading" : "Sign in"}
         </button>
       </form>
     </div>
   );
-};
+}

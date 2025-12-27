@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { AuthSwitcher } from "./components/AuthSwitcher";
 
-export default function AuthPage() {
+export default function AuthPage({ children }: { children: React.ReactNode }) {
   return (
     <main className="h-[100vh] relative">
       <p className="text-2xl uppercase tracking-wider absolute top-2 left-2 text-white/60">
@@ -13,10 +12,10 @@ export default function AuthPage() {
         alt="Background"
         fill
         priority
-        style={{ zIndex: -1 }}
+        style={{ zIndex: -1, objectFit: "cover" }}
       />
 
-      <AuthSwitcher />
+      {children}
     </main>
   );
 }
