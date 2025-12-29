@@ -24,6 +24,10 @@ export const createUser = async (
   const db = await connectMongoDB();
   const users = db.collection("users");
 
+  const isExistUser = await users.findOne({ username });
+
+  if (isExistUser) return { ok: false, error: "Username already taken" };
+
   const passwordHash = await bcrypt.hash(password, 10);
 
   const createdUser = users.insertOne({ username, password: passwordHash });
