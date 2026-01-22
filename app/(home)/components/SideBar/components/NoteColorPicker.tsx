@@ -1,7 +1,9 @@
 "use client";
 
+import { NotesUIContext } from "@/contexts/notesUI";
+import { useAddNote } from "@/services/notes/mutations";
 import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const COLORS = [
   "bg-red-400",
@@ -12,7 +14,19 @@ const COLORS = [
 ] as const;
 
 export const NoteColorPicker = () => {
+  const { setNoteCreatedId } = useContext(NotesUIContext);
+
   const [isColorsShow, setIsColorsShow] = useState(false);
+
+  const { mutateAsync: addNote } = useAddNote();
+
+  const handleAddNote = async (color: (typeof COLORS)[number]) => {
+    setIsColorsShow(false);
+
+    setNoteCreatedId(`new-note`);
+
+    await addNote(color);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -20,7 +34,7 @@ export const NoteColorPicker = () => {
         onClick={() => {
           setIsColorsShow(true);
         }}
-        className="text-white bg-slate-900 select-none rounded-full w-[50px] h-[50px] flex items-center justify-center text-3xl text-center mt-4 cursor-pointer duration-300 hover:scale-115"
+        className="text-white bg-slate-900 select-none rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center text-3xl text-center mt-4 cursor-pointer duration-300 hover:scale-115"
       >
         +
       </div>
@@ -31,7 +45,7 @@ export const NoteColorPicker = () => {
             {COLORS.map((color, index) => {
               return (
                 <motion.div
-                  onClick={() => setIsColorsShow(false)}
+                  onClick={() => handleAddNote(color)}
                   initial={{ opacity: 0, scale: 0.1, y: -15 + index * 15 }}
                   animate={{ opacity: 1, scale: 1, y: index * 32 }}
                   transition={{

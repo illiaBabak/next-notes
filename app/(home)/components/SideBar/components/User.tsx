@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import { motion, AnimatePresence } from "motion/react";
-import { logoutAction } from "./actions";
+import { logoutAction } from "../actions";
 
 export const User = ({ username }: { username: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,7 +14,7 @@ export const User = ({ username }: { username: string }) => {
     <ClickAwayListener onClickAway={() => setIsModalOpen(false)}>
       <div className="relative">
         <div
-          className="text-white bg-slate-900 select-none rounded-full w-[50px] h-[50px] flex items-center justify-center text-xl text-center mt-4 cursor-pointer duration-300 hover:scale-115"
+          className="text-white bg-slate-900 select-none rounded-full w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex items-center justify-center text-xl text-center mt-4 cursor-pointer duration-300 hover:scale-115"
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
           {username[0].toLocaleUpperCase()}

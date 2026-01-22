@@ -1,0 +1,5 @@
+export const NOTES_GET_QUERY = "NOTES_GET_QUERY";
+
+export const NOTES_MUTATION = "NOTES_MUTATION";
+
+export const NOTES_ADD_MUTATION = "NOTES_ADD_MUTATION";

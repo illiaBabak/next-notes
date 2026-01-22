@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.17",
     "bcryptjs": "^3.0.3",
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.0.0",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
+    "@tanstack/eslint-plugin-query": "^5.91.2",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.19.27",
     "@types/react": "^19",
