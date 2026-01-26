@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX } from 'react';
 
 export const Loader = (): JSX.Element => (
   <div className="flex justify-center items-center fixed right-[8px] bottom-[8px]">

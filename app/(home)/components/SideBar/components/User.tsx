@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import ClickAwayListener from "react-click-away-listener";
-import { motion, AnimatePresence } from "motion/react";
-import { logoutAction } from "../actions";
+import { useState } from 'react';
+import ClickAwayListener from 'react-click-away-listener';
+import { motion, AnimatePresence } from 'motion/react';
+import { logoutAction } from '../actions';
 
 export const User = ({ username }: { username: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +26,7 @@ export const User = ({ username }: { username: string }) => {
               animate={{ opacity: 1, scale: 1, x: 0 }}
               exit={{ opacity: 0, scale: 0.8, x: -10 }}
               transition={{
-                type: "spring",
+                type: 'spring',
                 stiffness: 300,
                 damping: 25,
                 duration: 0.2,

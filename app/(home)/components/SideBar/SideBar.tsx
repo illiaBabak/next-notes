@@ -1,15 +1,15 @@
-import { NoteColorPicker } from "./components/NoteColorPicker";
-import { User } from "./components/User";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import jwt from "jsonwebtoken";
+import { NoteColorPicker } from './components/NoteColorPicker';
+import { User } from './components/User';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import jwt from 'jsonwebtoken';
 
 export const SideBar = async () => {
-  const token = (await cookies()).get("session")?.value ?? "";
+  const token = (await cookies()).get('session')?.value ?? '';
 
-  if (!token) redirect("/");
+  if (!token) redirect('/');
 
-  const payload = jwt.verify(token, process.env.JWT_SECRET ?? "") as {
+  const payload = jwt.verify(token, process.env.JWT_SECRET ?? '') as {
     username: string;
   };
 

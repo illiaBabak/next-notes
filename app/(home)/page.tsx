@@ -1,7 +1,7 @@
-import { NotesUIContextProvider } from "@/contexts/notesUI";
-import { NotesList } from "./components/NotesList/NotesList";
-import { Search } from "./components/Search/Search";
-import { SideBar } from "./components/SideBar/SideBar";
+import { NotesUIContextProvider } from '@/contexts/notesUI';
+import { NotesList } from './components/NotesList/NotesList';
+import { Search } from './components/Search/Search';
+import { SideBar } from './components/SideBar/SideBar';
 
 export default function Home() {
   return (

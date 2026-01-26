@@ -1,17 +1,10 @@
-"use client";
+'use client';
 
-import { NotesUIContext } from "@/contexts/notesUI";
-import { useAddNote } from "@/services/notes/mutations";
-import { AnimatePresence, motion } from "motion/react";
-import { useContext, useState } from "react";
-
-const COLORS = [
-  "bg-red-400",
-  "bg-orange-400",
-  "bg-violet-400",
-  "bg-sky-400",
-  "bg-emerald-400",
-] as const;
+import { NotesUIContext } from '@/contexts/notesUI';
+import { useAddNote } from '@/services/notes/mutations';
+import { NOTE_COLORS } from '@/utils/constants';
+import { AnimatePresence, motion } from 'motion/react';
+import { useContext, useState } from 'react';
 
 export const NoteColorPicker = () => {
   const { setNoteCreatedId } = useContext(NotesUIContext);
@@ -20,7 +13,7 @@ export const NoteColorPicker = () => {
 
   const { mutateAsync: addNote } = useAddNote();
 
-  const handleAddNote = async (color: (typeof COLORS)[number]) => {
+  const handleAddNote = async (color: (typeof NOTE_COLORS)[number]) => {
     setIsColorsShow(false);
 
     setNoteCreatedId(`new-note`);
@@ -42,7 +35,7 @@ export const NoteColorPicker = () => {
       {isColorsShow && (
         <AnimatePresence>
           <div className="flex flex-col gap-4 items-center mt-4 relative">
-            {COLORS.map((color, index) => {
+            {NOTE_COLORS.map((color, index) => {
               return (
                 <motion.div
                   onClick={() => handleAddNote(color)}

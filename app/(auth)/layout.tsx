@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function AuthPage({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +12,7 @@ export default function AuthPage({ children }: { children: React.ReactNode }) {
         alt="Background"
         fill
         priority
-        style={{ zIndex: -1, objectFit: "cover" }}
+        style={{ zIndex: -1, objectFit: 'cover' }}
       />
 
       {children}

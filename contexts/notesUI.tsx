@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
 type NotesUIContextType = {
   noteCreatedId: string;
@@ -8,18 +8,14 @@ type NotesUIContextType = {
 };
 
 export const NotesUIContext = createContext<NotesUIContextType>({
-  noteCreatedId: "",
+  noteCreatedId: '',
   setNoteCreatedId: () => {
-    throw new Error("Notes UI context is not initalized");
+    throw new Error('Notes UI context is not initalized');
   },
 });
 
-export const NotesUIContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [noteCreatedId, setNoteCreatedId] = useState("");
+export const NotesUIContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const [noteCreatedId, setNoteCreatedId] = useState('');
 
   return (
     <NotesUIContext.Provider value={{ noteCreatedId, setNoteCreatedId }}>

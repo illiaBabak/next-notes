@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import Image from 'next/image';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 export const Search = () => {
   const [isFocusedInput, setIsFocusedInput] = useState(false);
@@ -15,7 +15,7 @@ export const Search = () => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(name, value);
 
-    router.push(pathname + "?" + params.toString());
+    router.push(pathname + '?' + params.toString());
   };
 
   return (
@@ -24,8 +24,8 @@ export const Search = () => {
         <Image
           alt="search"
           src="/search.png"
-          width={isFocusedInput ? "30" : "40"}
-          height={isFocusedInput ? "30" : "40"}
+          width={isFocusedInput ? '30' : '40'}
+          height={isFocusedInput ? '30' : '40'}
           className="object-cover mx-1 duration-300"
         />
       </div>
@@ -36,10 +36,10 @@ export const Search = () => {
         onFocus={() => setIsFocusedInput(true)}
         onBlur={({ currentTarget: { value } }) => {
           setIsFocusedInput(false);
-          createQueryString("search", value);
+          createQueryString('search', value);
         }}
         onKeyDown={({ code, currentTarget }) => {
-          if (code === "Enter") currentTarget.blur();
+          if (code === 'Enter') currentTarget.blur();
         }}
       />
     </div>

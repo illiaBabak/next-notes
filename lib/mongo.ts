@@ -1,8 +1,8 @@
-import { Db, MongoClient } from "mongodb";
+import { Db, MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI ?? "";
+const uri = process.env.MONGODB_URI ?? '';
 
-const dbName = process.env.MONGODB_NAME ?? "";
+const dbName = process.env.MONGODB_NAME ?? '';
 
 const client = new MongoClient(uri);
 
@@ -13,6 +13,6 @@ export const connectMongoDB = async (): Promise<Db> => {
 
     return db;
   } catch {
-    throw new Error("Something went wrong with MongoDB connection");
+    throw new Error('Something went wrong with MongoDB connection');
   }
 };
