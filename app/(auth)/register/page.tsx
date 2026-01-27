@@ -24,6 +24,7 @@ export default function SignUp() {
           <div className="flex flex-col items-start gap-1">
             <label className="text-sm font-medium text-white/80">Username</label>
             <input
+              data-testid="username"
               name="username"
               type="text"
               placeholder="your.name"
@@ -34,6 +35,7 @@ export default function SignUp() {
           <div className="flex flex-col items-start gap-1">
             <label className="text-sm font-medium text-white/80">Password</label>
             <input
+              data-testid="password"
               name="password"
               type="password"
               placeholder="••••••••"
@@ -44,6 +46,7 @@ export default function SignUp() {
           <div className="flex flex-col items-start gap-1">
             <label className="text-sm font-medium text-white/80">Confirm password</label>
             <input
+              data-testid="confirm-password"
               name="confirm-password"
               type="password"
               placeholder="••••••••"
@@ -62,6 +65,7 @@ export default function SignUp() {
         </div>
 
         <button
+          data-testid="sign-up-btn"
           disabled={isPending}
           type="submit"
           className={`cursor-pointer not-last-of-type:mt-2 w-full rounded-xl border border-white/80 bg-white/90 sm:py-3 py-2 text-sm font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.6)] transition transform hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 active:scale-[0.98] ${

@@ -24,6 +24,7 @@ export const NoteColorPicker = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <div
+        data-testid="add-note-btn"
         onClick={() => {
           setIsColorsShow(true);
         }}
@@ -38,6 +39,7 @@ export const NoteColorPicker = () => {
             {NOTE_COLORS.map((color, index) => {
               return (
                 <motion.div
+                  data-testid={`color-picker-${color}`}
                   onClick={() => handleAddNote(color)}
                   initial={{ opacity: 0, scale: 0.1, y: -15 + index * 15 }}
                   animate={{ opacity: 1, scale: 1, y: index * 32 }}

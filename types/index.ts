@@ -2,7 +2,7 @@ import { NOTE_COLORS } from '@/utils/constants';
 
 export type Note = {
   _id: string;
-  created_at: string;
+  created_at: Date;
   username: string;
   color: (typeof NOTE_COLORS)[number];
   text: string;

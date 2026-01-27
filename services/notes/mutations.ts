@@ -55,7 +55,7 @@ export const useAddNote = (): UseMutationResult<string, Error, (typeof NOTE_COLO
 
       const newNote: Note = {
         _id: `new-note`,
-        created_at: new Date().toString(),
+        created_at: new Date(),
         color: newNoteColor,
         text: 'New note',
         username: '',

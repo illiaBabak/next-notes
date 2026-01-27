@@ -35,6 +35,7 @@ export const NoteModal = ({ note, onClose }: Props): JSX.Element => {
 
       <div className="flex flex-col items-center justify-start mt-4 h-full">
         <textarea
+          data-testid="note-textarea"
           value={textToEdit}
           onChange={({ currentTarget: { value } }) => setTextToEdit(value)}
           className="
@@ -75,6 +76,7 @@ export const NoteModal = ({ note, onClose }: Props): JSX.Element => {
             {NOTE_COLORS.map((color, index) => {
               return (
                 <div
+                  data-testid={`modal-color-${color}`}
                   onClick={() => setSelectedColor(color)}
                   key={`color-modal-${index}`}
                   className={`${color} ${selectedColor === color ? 'ring-3 ring-blue-500 ring-offset-2 ring-offset-white scale-110 duration-300' : ''} cursor-pointer w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-full mx-2 md:mx-4 lg:mx-6`}
@@ -86,6 +88,7 @@ export const NoteModal = ({ note, onClose }: Props): JSX.Element => {
 
         <div className="flex flex-col mt-8 w-[80%] gap-3 justify-center items-center absolute bottom-[24px]">
           <div
+            data-testid="save-note-btn"
             onClick={async () => {
               onClose();
               await editNote({ ...note, _id: note._id, text: textToEdit, color: selectedColor });
@@ -95,6 +98,7 @@ export const NoteModal = ({ note, onClose }: Props): JSX.Element => {
             Save
           </div>
           <div
+            data-testid="delete-note-btn"
             onClick={async () => {
               onClose();
               await deleteNote(note._id);

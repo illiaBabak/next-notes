@@ -35,7 +35,7 @@ export const POST = async (req: Request) => {
 
   if (!color) return Response.json({ error: 'Color is required!' }, { status: 400 });
 
-  const date = new Date().toString();
+  const date = new Date();
 
   const newNote: NoteCreate = {
     created_at: date,

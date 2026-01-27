@@ -2,7 +2,8 @@ import { Db, MongoClient } from 'mongodb';
 
 const uri = process.env.MONGODB_URI ?? '';
 
-const dbName = process.env.MONGODB_NAME ?? '';
+const dbName =
+  process.env.APP_ENV === 'test' ? process.env.MONGODB_NAME_TEST : process.env.MONGODB_NAME_PROD;
 
 const client = new MongoClient(uri);
 

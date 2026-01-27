@@ -31,6 +31,7 @@ export const Search = () => {
       </div>
 
       <input
+        data-testid="search-input"
         className="w-full outline-none"
         placeholder="Search"
         onFocus={() => setIsFocusedInput(true)}
