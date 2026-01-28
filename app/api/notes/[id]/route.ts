@@ -2,7 +2,9 @@ import { deleteNote } from '@/lib/notes/deleteNote';
 import { editNote } from '@/lib/notes/editNote';
 import { cookies } from 'next/headers';
 
-export const PATCH = async (req: Request, { params }: { params: { id: string } }) => {
+type Params = { params: Promise<{ id: string }> };
+
+export const PATCH = async (req: Request, { params }: Params) => {
   const session = (await cookies()).get('session')?.value;
 
   if (!session) return Response.json({ error: 'Unauthorized' }, { status: 401 });
@@ -23,7 +25,7 @@ export const PATCH = async (req: Request, { params }: { params: { id: string } }
   return Response.json({ res }, { status: 201 });
 };
 
-export const DELETE = async (_: Request, { params }: { params: { id: string } }) => {
+export const DELETE = async (_: Request, { params }: Params) => {
   const session = (await cookies()).get('session')?.value;
 
   if (!session) return Response.json({ error: 'Unauthorized' }, { status: 401 });
