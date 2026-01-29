@@ -67,7 +67,7 @@ export const NotesList = () => {
                 stiffness: 150,
                 damping: 15,
                 mass: 1,
-                duration: 1,
+                duration: 0.3,
               }}
               className={`${note.color} flex flex-col justify-between w-[190px] h-[190px] md:w-[240px] md:h-[240px] rounded-3xl p-4`}
               key={`note-${note._id}`}

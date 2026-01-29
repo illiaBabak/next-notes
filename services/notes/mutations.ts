@@ -71,7 +71,7 @@ export const useAddNote = (): UseMutationResult<string, Error, (typeof NOTE_COLO
       // 500 ms for animate optimistic created note
       setTimeout(async () => {
         await queryClient.invalidateQueries({ queryKey: [NOTES_GET_QUERY] });
-      }, 500);
+      }, 360);
     },
   });
 };
